@@ -1,6 +1,5 @@
 package com.github.saiprasadkrishnamurthy.databindings.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saiprasadkrishnamurthy.databindings.model.*;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -19,16 +18,16 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * Converts the agnostic schema meta model to plain pojos.
+ * Converts the agnostic schema meta model to Swagger API pojos.
  *
  * @author Sai.
  */
 @Service
-public class PlainPojoBindingsGenerator implements DataBindingsGenerator {
+public class SwaggerBindingsGenerator implements DataBindingsGenerator {
 
     private final DataElementsRepository dataElementsRepository;
 
-    public PlainPojoBindingsGenerator(final DataElementsRepository dataElementsRepository) {
+    public SwaggerBindingsGenerator(final DataElementsRepository dataElementsRepository) {
         this.dataElementsRepository = dataElementsRepository;
     }
 
@@ -40,13 +39,13 @@ public class PlainPojoBindingsGenerator implements DataBindingsGenerator {
             DataBindingsGenerationResponse response = new DataBindingsGenerationResponse();
             DataElements dataElements = dataElementsRepository.getDataElements(dataBindingsGenerationRequest);
             Configuration cfg = new Configuration(new Version("2.3.30"));
-            cfg.setClassLoaderForTemplateLoading(PlainPojoBindingsGenerator.class.getClassLoader(), "templates/pojo");
+            cfg.setClassLoaderForTemplateLoading(SwaggerBindingsGenerator.class.getClassLoader(), "templates/swagger");
             cfg.setIncompatibleImprovements(new Version(2, 3, 20));
             cfg.setDefaultEncoding("UTF-8");
             cfg.setLocale(Locale.US);
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-            Template recordTemplate = cfg.getTemplate("pojo_class.ftl");
-            Template enumerationTemplate = cfg.getTemplate("pojo_enumeration.ftl");
+            Template recordTemplate = cfg.getTemplate("swagger_class.ftl");
+            Template enumerationTemplate = cfg.getTemplate("swagger_enumeration.ftl");
             List<JavaType> javaTypes = new ArrayList<>();
             dataElements.forEach((key, value) -> {
                         try (StringWriter out = new StringWriter()) {
