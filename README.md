@@ -169,3 +169,14 @@ For example:
   ]
 }
 ```
+## What about equals an hashcode in Java POJOs?
+Equals and Hashcode are generated in POJOs based on what is defined in the `identifierFields` property in a definition.
+
+## Are the AVRO schemas 'inlined'?
+Yes - if a JSON definition has `"topLevelContainerType": true`, then the generated AVRO schemas for these definitions
+will be a single file with all the dependencies inlined.
+
+
+
+
+
