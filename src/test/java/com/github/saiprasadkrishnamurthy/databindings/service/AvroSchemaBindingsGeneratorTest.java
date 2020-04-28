@@ -96,7 +96,7 @@ class AvroSchemaBindingsGeneratorTest {
                             .forEach(i -> countDownLatch.countDown());
                     System.out.println(" \t\t " + Arrays.deepToString(tmp.list()));
                 }
-                System.out.println(" File exists: " + tmp.exists() +" ----- "+Paths.get(tmp.getAbsolutePath(), "Engineer_V1.avsc").toFile().exists());
+                System.out.println(" File exists: " + tmp.exists() + " ----- " + new File(tmp.getAbsolutePath() + File.separator + "Engineer_V1.avsc").exists());
                 Thread.sleep(TIMEOUT_SECONDS * 1000);
             }
         });
