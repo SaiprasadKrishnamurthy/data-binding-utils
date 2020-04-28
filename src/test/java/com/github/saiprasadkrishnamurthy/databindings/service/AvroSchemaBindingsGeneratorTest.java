@@ -20,13 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -35,12 +29,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
 class AvroSchemaBindingsGeneratorTest {
-
-    private static final int TIMEOUT_SECONDS = 10;
-
-    private final CountDownLatch countDownLatch = new CountDownLatch(TIMEOUT_SECONDS);
-
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     private final ObjectMapper OBJECTMAPPER = new ObjectMapper();
 
@@ -82,24 +70,8 @@ class AvroSchemaBindingsGeneratorTest {
         dataElements.putAll(expected);
         when(dataElementsRepository.getDataElements(dataBindingsGenerationRequest)).thenReturn(dataElements);
         avroSchemaBindingsGenerator.generate(dataBindingsGenerationRequest);
-        waitUntilFileExists(tmp);
         assertThat(Paths.get(tmp.getAbsolutePath(), "Engineer_V1.avsc").toFile().exists(), equalTo(true));
         assertThat(FileUtils.readFileToString(Paths.get(tmp.getAbsolutePath(), "Engineer_V1.avsc").toFile(), Charset.defaultCharset()),
                 equalTo(IOUtils.toString(AvroSchemaBindingsGeneratorTest.class.getClassLoader().getResourceAsStream("output/Engineer_V1.avsc"), Charset.defaultCharset())));
-    }
-
-    private void waitUntilFileExists(File tmp) throws Exception {
-        executorService.submit(() -> {
-            while (true) {
-                if (tmp.exists() && tmp.list() != null && tmp.list().length > 0) {
-                    IntStream.range(0, TIMEOUT_SECONDS)
-                            .forEach(i -> countDownLatch.countDown());
-                    System.out.println(" \t\t " + Arrays.deepToString(tmp.list()));
-                }
-                System.out.println(" File exists: " + tmp.exists() + " ----- " + new File(tmp.getAbsolutePath() + File.separator + "Engineer_V1.avsc").exists());
-                Thread.sleep(TIMEOUT_SECONDS * 1000);
-            }
-        });
-        countDownLatch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS);
     }
 }
