@@ -97,7 +97,7 @@ class AvroSchemaBindingsGeneratorTest {
                     System.out.println(" \t\t " + Arrays.deepToString(tmp.list()));
                 }
                 System.out.println(" File exists: " + tmp.exists());
-                Thread.sleep(TIMEOUT_SECONDS);
+                Thread.sleep(TIMEOUT_SECONDS * 1000);
             }
         });
         countDownLatch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS);
