@@ -22,11 +22,12 @@ class DataGeneratorOrchestratorTest {
     private DataGeneratorOrchestrator dataGeneratorOrchestrator;
 
     @Test
-    void generate_with_no_validation_error() {
+    void generate_with_no_validation_error() throws Exception {
         DataBindingsGenerationRequest dataBindingsGenerationRequest = new DataBindingsGenerationRequest();
         dataBindingsGenerationRequest.setValidationRulesFile("src/test/resources/validationrules/rules1.json");
         dataBindingsGenerationRequest.setSchemasBaseDir("src/test/resources/input");
-        File tmp = new File(FileUtils.getTempDirectory().getAbsolutePath() + "/" + System.currentTimeMillis());
+        File tmp = new File("generated_" + System.currentTimeMillis());
+        FileUtils.forceMkdir(tmp);
         dataBindingsGenerationRequest.setOutputDir(tmp.getAbsolutePath());
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
@@ -40,11 +41,12 @@ class DataGeneratorOrchestratorTest {
     }
 
     @Test
-    void generate_with_validation_error() {
+    void generate_with_validation_error() throws Exception {
         DataBindingsGenerationRequest dataBindingsGenerationRequest = new DataBindingsGenerationRequest();
         dataBindingsGenerationRequest.setValidationRulesFile("src/test/resources/validationrules/rules2.json");
         dataBindingsGenerationRequest.setSchemasBaseDir("src/test/resources/input");
-        File tmp = new File(FileUtils.getTempDirectory().getAbsolutePath() + "/" + System.currentTimeMillis());
+        File tmp = new File("generated_" + System.currentTimeMillis());
+        FileUtils.forceMkdir(tmp);
         dataBindingsGenerationRequest.setOutputDir(tmp.getAbsolutePath());
         dataBindingsGenerationRequest.setBindings(Collections.singletonList(DataBindingsType.AvroSchema));
         dataGeneratorOrchestrator.generate(dataBindingsGenerationRequest);
