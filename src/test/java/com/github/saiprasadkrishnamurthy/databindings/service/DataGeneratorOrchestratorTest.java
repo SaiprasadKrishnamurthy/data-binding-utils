@@ -1,5 +1,6 @@
 package com.github.saiprasadkrishnamurthy.databindings.service;
 
+import com.github.saiprasadkrishnamurthy.databindings.DataBindingAppConfig;
 import com.github.saiprasadkrishnamurthy.databindings.model.DataBindingsGenerationRequest;
 import com.github.saiprasadkrishnamurthy.databindings.model.DataBindingsType;
 import org.apache.commons.io.FileUtils;
@@ -15,7 +16,7 @@ import java.util.Collections;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest
+@SpringBootTest(classes = DataBindingAppConfig.class)
 class DataGeneratorOrchestratorTest {
 
     @Autowired

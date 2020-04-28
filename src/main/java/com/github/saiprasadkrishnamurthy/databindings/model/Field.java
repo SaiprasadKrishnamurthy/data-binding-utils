@@ -35,4 +35,8 @@ public class Field {
     public String getJavaType() {
         return JAVA_PRIMITIVE_TYPES.getOrDefault(type, type);
     }
+
+    public boolean isAJavaType() {
+        return JAVA_PRIMITIVE_TYPES.containsKey(type);
+    }
 }
