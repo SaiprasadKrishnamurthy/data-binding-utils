@@ -1,0 +1,14 @@
+{
+  "qualifiedName": "com.foo.data.EngineerType",
+  "version": "1",
+  "type": "enumeration",
+  "documentation": "A Engineer Type",
+  "tags": [
+    "engineerType"
+  ],
+  "enumeratedValues": [
+    "BiographicSubmission",
+    "BiographicAndBiometricSubmission",
+    "BiometricLiveCapture"
+  ]
+}

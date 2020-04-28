@@ -1,0 +1,57 @@
+{
+  "namespace" : "com.foo.data",
+  "name" : "Engineer",
+  "type" : "record",
+  "version" : "1",
+  "doc" : "A Engineer",
+  "fields" : [ {
+    "name" : "department",
+    "doc" : "Department",
+    "type" : "string"
+  }, {
+    "name" : "type",
+    "doc" : "TODO",
+    "type" : [ "null", {
+      "namespace" : "com.foo.data",
+      "name" : "EngineerType",
+      "type" : "enum",
+      "version" : "1",
+      "doc" : "A Engineer Type",
+      "symbols" : [ "BiographicSubmission", "BiographicAndBiometricSubmission", "BiometricLiveCapture" ]
+    } ]
+  }, {
+    "name" : "phoneNumbers",
+    "doc" : "TODO",
+    "type" : {
+      "type" : "array",
+      "items" : [ "null", "string" ]
+    }
+  }, {
+    "name" : "employeeId",
+    "doc" : "Employee ID",
+    "type" : "string"
+  }, {
+    "name" : "name",
+    "doc" : "Name",
+    "type" : "string"
+  }, {
+    "name" : "addressInfo",
+    "doc" : "Address Info",
+    "type" : {
+      "namespace" : "com.foo.data",
+      "name" : "AddressInfo",
+      "type" : "record",
+      "version" : "1",
+      "doc" : "A Address Type",
+      "fields" : [ {
+        "name" : "houseNumber",
+        "doc" : "House Number",
+        "type" : "string"
+      }, {
+        "name" : "zip",
+        "doc" : "Zip code",
+        "type" : "string"
+      } ]
+    }
+  } ]
+}

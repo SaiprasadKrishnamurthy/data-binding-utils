@@ -1,0 +1,36 @@
+{
+  "name": "data types validation rules",
+  "description": "data types validation rules based on the company guidelines",
+  "validationRules": [
+    {
+      "name": "Missing Version.",
+      "description": "Version is missing",
+      "errorCondition": "doc.version == null",
+      "severity": "Critical"
+    },
+    {
+      "name": "Missing Documentation.",
+      "description": "Documentation is missing",
+      "errorCondition": "doc.documentation == null",
+      "severity": "Critical"
+    },
+    {
+      "name": "Missing Tags.",
+      "description": "Tags are missing",
+      "errorCondition": "doc.tags == null",
+      "severity": "Minor"
+    },
+    {
+      "name": "Extension from base for tags",
+      "description": "Engineer definitions must extend from the baseType \"com.foo.data.Employee\"",
+      "errorCondition": "doc.tags contains \"engineer\" && doc.baseType != \"com.foo.data.Employee\"",
+      "severity": "Critical"
+    },
+    {
+      "name": "Extension from base for name",
+      "description": "Engineer definitions must extend from the baseType \"com.foo.data.Employee\"",
+      "errorCondition": "doc.qualifiedName.endsWith('Engineer') && doc.baseType != \"com.foo.data.Employee\"",
+      "severity": "Critical"
+    }
+  ]
+}

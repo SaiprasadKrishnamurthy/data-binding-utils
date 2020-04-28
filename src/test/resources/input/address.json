@@ -1,0 +1,23 @@
+{
+  "qualifiedName": "com.foo.data.AddressInfo",
+  "version": "1",
+  "type": "object",
+  "documentation": "A Address Type",
+  "tags": [
+    "address"
+  ],
+  "fields": [
+    {
+      "name": "houseNumber",
+      "type": "string",
+      "documentation": "House Number",
+      "required": true
+    },
+    {
+      "name": "zip",
+      "type": "string",
+      "documentation": "Zip code",
+      "required": true
+    }
+  ]
+}

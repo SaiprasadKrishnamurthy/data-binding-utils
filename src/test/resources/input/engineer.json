@@ -1,0 +1,29 @@
+{
+  "qualifiedName": "com.foo.data.Engineer",
+  "version": "1",
+  "type": "object",
+  "documentation": "A Engineer",
+  "baseType": "com.foo.data.Employee",
+  "topLevelContainerType": true,
+  "tags": [
+    "engineer"
+  ],
+  "fields": [
+    {
+      "name": "department",
+      "type": "string",
+      "documentation": "Department"
+    },
+    {
+      "name": "type",
+      "type": "com.foo.data.EngineerType",
+      "required": false
+    },
+    {
+      "name": "phoneNumbers",
+      "type": "string",
+      "array": true,
+      "required": false
+    }
+  ]
+}

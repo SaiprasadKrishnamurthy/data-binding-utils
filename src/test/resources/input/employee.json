@@ -1,0 +1,18 @@
+{
+  "qualifiedName": "com.foo.data.Employee",
+  "version": "1",
+  "type": "object",
+  "documentation": "A Employee Type",
+  "baseType": "com.foo.data.Person",
+  "tags": [
+    "employee"
+  ],
+  "fields": [
+    {
+      "name": "employeeId",
+      "type": "string",
+      "documentation": "Employee ID",
+      "required": true
+    }
+  ]
+}

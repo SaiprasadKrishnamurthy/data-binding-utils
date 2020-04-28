@@ -1,0 +1,23 @@
+{
+  "qualifiedName": "com.foo.data.Person",
+  "version": "1",
+  "type": "object",
+  "documentation": "A Person Type",
+  "tags": [
+    "person"
+  ],
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "documentation": "Name",
+      "required": true
+    },
+    {
+      "name": "addressInfo",
+      "type": "com.foo.data.AddressInfo",
+      "documentation": "Address Info",
+      "required": true
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "condition": "2 > 1",
+    "name": "data types validation rules",
+    "description": "data types validation rules based on the company guidelines",
+    "composingRules": [
+      {
+        "condition": "doc.tags contains \"engineer\" && doc.baseType != \"com.foo.data.Employee\"",
+        "name": "Extension from base for tags",
+        "description": "Engineer definitions must extend from the baseType \"com.foo.data.Employee\"",
+        "priority": 1,
+        "actions": [
+          "fn.addError(errors, file, 'Engineer definitions must extend from the baseType \"com.foo.data.Employee\"', 'Critical')"
+        ]
+      },
+      {
+        "condition": "doc.qualifiedName.endsWith('Engineer') && doc.baseType == \"com.foo.data.Employee\"",
+        "name": "Extension from base for name",
+        "description": "Engineer definitions must extend from the baseType \"com.foo.data.Employee\"",
+        "priority": 2,
+        "actions": [
+          "fn.addError(errors, file, 'Engineer definitions must extend from the baseType \"com.foo.data.Employee\"', 'Critical')"
+        ]
+      }
+    ],
+    "compositeRuleType": "ConditionalRuleGroup"
+  }
+]
