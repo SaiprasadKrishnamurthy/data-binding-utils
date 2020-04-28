@@ -5,6 +5,7 @@
   "documentation": "A Engineer",
   "baseType": "com.foo.data.Employee",
   "topLevelContainerType": true,
+  "identifierFields": ["employeeId", "type", "department"],
   "tags": [
     "engineer"
   ],

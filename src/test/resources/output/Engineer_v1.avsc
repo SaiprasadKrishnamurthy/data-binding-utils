@@ -51,6 +51,14 @@
         "name" : "zip",
         "doc" : "Zip code",
         "type" : "string"
+      }, {
+        "name" : "lat",
+        "doc" : "Latitude",
+        "type" : "double"
+      }, {
+        "name" : "lng",
+        "doc" : "Longitude",
+        "type" : "double"
       } ]
     }
   } ]

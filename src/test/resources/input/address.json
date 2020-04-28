@@ -18,6 +18,18 @@
       "type": "string",
       "documentation": "Zip code",
       "required": true
+    },
+    {
+      "name": "lat",
+      "type": "double",
+      "documentation": "Latitude",
+      "required": true
+    },
+    {
+      "name": "lng",
+      "type": "double",
+      "documentation": "Longitude",
+      "required": true
     }
   ]
 }

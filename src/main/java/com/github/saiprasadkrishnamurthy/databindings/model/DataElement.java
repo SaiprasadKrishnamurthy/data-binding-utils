@@ -1,11 +1,11 @@
 package com.github.saiprasadkrishnamurthy.databindings.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Representation of a canonical schema element.
@@ -20,13 +20,14 @@ public class DataElement {
     private String version = "TODO";
     private DataElementType type = DataElementType.object;
     private String baseType;
-    private String author = "TODO";
+    private String author = "unascribed";
 
     private String documentation = "TODO";
     private List<Field> fields = new ArrayList<>();
     private List<String> tags = new ArrayList<>();
     private List<String> enumeratedValues = new ArrayList<>();
     private boolean topLevelContainerType;
+    private List<String> identifierFields = new ArrayList<>();
 
     private String fileName;
 
@@ -40,5 +41,16 @@ public class DataElement {
 
     public String getFileName() {
         return fileName == null ? qualifiedName.substring(qualifiedName.lastIndexOf(".") + 1) : fileName;
+    }
+
+    public String getIdentifiers() {
+        if (identifierFields.isEmpty()) {
+            return "";
+        }
+        return "of = {" + identifierFields.stream().map(i -> "\"" + i + "\"").collect(Collectors.joining(", ")) + "} ";
+    }
+
+    public boolean isExtends() {
+        return StringUtils.isNotBlank(baseType);
     }
 }
