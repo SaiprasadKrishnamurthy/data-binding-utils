@@ -65,25 +65,32 @@ The agnostic JSON acts as the schemata for generating all the binding artifacts.
 ### Simple Definition with an array type.
 ```
 {
-  "qualifiedName": "com.foo.data.Person",
+  "qualifiedName": "com.foo.data.Engineer",
   "version": "1",
   "type": "object",
-  "documentation": "A Person Type",
+  "documentation": "A Engineer",
+  "baseType": "com.foo.data.Employee",
+  "topLevelContainerType": true,
+  "identifierFields": ["employeeId", "type", "department"],
   "tags": [
-    "person"
+    "engineer"
   ],
   "fields": [
     {
-      "name": "name",
+      "name": "department",
       "type": "string",
-      "documentation": "Name",
-      "required": true
+      "documentation": "Department"
     },
     {
-      "name": "addressInfo",
-      "type": "com.foo.data.AddressInfo",
-      "documentation": "Address Info",
-      "required": true
+      "name": "type",
+      "type": "com.foo.data.EngineerType",
+      "required": false
+    },
+    {
+      "name": "phoneNumbers",
+      "type": "string",
+      "array": true,
+      "required": false
     }
   ]
 }
