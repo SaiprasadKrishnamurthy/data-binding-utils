@@ -94,6 +94,7 @@ class AvroSchemaBindingsGeneratorTest {
                     IntStream.range(0, TIMEOUT_SECONDS)
                             .forEach(i -> countDownLatch.countDown());
                 }
+                System.out.println(" File exists: " + tmp.exists());
                 Thread.sleep(TIMEOUT_SECONDS);
             }
         });
