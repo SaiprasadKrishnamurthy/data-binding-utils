@@ -51,7 +51,8 @@ class AvroSchemaBindingsGeneratorTest {
             DataElement engineerType = OBJECTMAPPER.readValue(IOUtils.toString(AvroSchemaBindingsGeneratorTest.class.getClassLoader().getResourceAsStream("input/engineerType.json"), Charset.defaultCharset()), DataElement.class);
         DataBindingsGenerationRequest dataBindingsGenerationRequest = new DataBindingsGenerationRequest();
         dataBindingsGenerationRequest.setSchemasBaseDir("src/test/resources/input");
-        File tmp = new File(FileUtils.getTempDirectory().getAbsolutePath() + "/" + System.currentTimeMillis());
+        File tmp = new File("generated_" + System.currentTimeMillis());
+        FileUtils.forceMkdir(tmp);
         dataBindingsGenerationRequest.setOutputDir(tmp.getAbsolutePath());
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
