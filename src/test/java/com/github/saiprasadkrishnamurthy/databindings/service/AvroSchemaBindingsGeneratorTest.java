@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -93,6 +94,7 @@ class AvroSchemaBindingsGeneratorTest {
                 if (tmp.exists() && tmp.list() != null && tmp.list().length > 0) {
                     IntStream.range(0, TIMEOUT_SECONDS)
                             .forEach(i -> countDownLatch.countDown());
+                    System.out.println(" \t\t " + Arrays.deepToString(tmp.list()));
                 }
                 System.out.println(" File exists: " + tmp.exists());
                 Thread.sleep(TIMEOUT_SECONDS);
