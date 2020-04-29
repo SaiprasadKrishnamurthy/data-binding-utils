@@ -169,7 +169,7 @@ For example:
   ]
 }
 ```
-## What about equals an hashcode in Java POJOs?
+## What about equals and hashcode in Java POJOs?
 Equals and Hashcode are generated in POJOs based on what is defined in the `identifierFields` property in a definition.
 
 ## Are the AVRO schemas 'inlined'?
