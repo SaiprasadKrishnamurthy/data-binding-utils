@@ -176,6 +176,44 @@ Equals and Hashcode are generated in POJOs based on what is defined in the `iden
 Yes - if a JSON definition has `"topLevelContainerType": true`, then the generated AVRO schemas for these definitions
 will be a single file with all the dependencies inlined.
 
+## Usage
+```
+<dependency>
+    <groupId>com.github.saiprasadkrishnamurthy</groupId>
+    <artifactId>data-binding-utils</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
+Programmatically invoke this way. This utility needs a Spring container to run.
+
+Just import this configuration file anywhere in your spring application.
+
+```
+@Import(DataBindingAppConfig.class)
+```
+
+You'll now have an autowired instance of the DataGeneratorOrchestrator
+
+```
+@Autowired
+private DataGeneratorOrchestrator dataGeneratorOrchestrator;
+```
+
+Now invoke the method with necessary parameters.
+```
+    DataBindingsGenerationRequest dataBindingsGenerationRequest = new DataBindingsGenerationRequest();
+    dataBindingsGenerationRequest.setSchemasBaseDir("/Users/saiprasadkrishnamurthy/foo/definitions");
+    dataBindingsGenerationRequest.setOutputDir("/Users/saiprasadkrishnamurthy/foo/output");
+    dataBindingsGenerationRequest.setValidationRulesFile("/Users/saiprasadkrishnamurthy/foo/validationRules.json");
+    dataBindingsGenerationRequest.setBindings(Arrays.asList(DataBindingsType.AvroSchema, DataBindingsType.PlainPojo, DataBindingsType.DependencyGraph));
+    dataGeneratorOrchestrator.generate(dataBindingsGenerationRequest);
+```
+
+
+
+
+
 
 
 
