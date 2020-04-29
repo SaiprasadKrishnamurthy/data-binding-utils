@@ -10,7 +10,7 @@ are automatically generated.
 
 The agnostic JSON acts as the schemata for generating all the binding artifacts.
 
-<img src="diagram.png" width=400 height=300 />
+<img src="diagram.png" width=500 height=500 />
 
 ## How does a JSON data definition look like?
 
@@ -177,7 +177,7 @@ Yes - if a JSON definition has `"topLevelContainerType": true`, then the generat
 will be a single file with all the dependencies inlined.
 
 ## How does the generated dependency tree HTML look like?
-![Generated Tree](tree.png)
+<img src="tree.png" width=500 height=500 />
 
 
 ## Usage
