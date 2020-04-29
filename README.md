@@ -10,7 +10,7 @@ are automatically generated.
 
 The agnostic JSON acts as the schemata for generating all the binding artifacts.
 
-![Conceptual](diagram.png | width=100)
+<img src="diagram.png" width=400 height=300 />
 
 ## How does a JSON data definition look like?
 
