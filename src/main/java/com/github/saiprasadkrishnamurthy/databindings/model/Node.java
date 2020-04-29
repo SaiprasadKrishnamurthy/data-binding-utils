@@ -6,8 +6,9 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "id")
+@EqualsAndHashCode(exclude = {"id", "contents"})
 public class Node {
     private final int id;
     private final String name;
+    private final String contents;
 }

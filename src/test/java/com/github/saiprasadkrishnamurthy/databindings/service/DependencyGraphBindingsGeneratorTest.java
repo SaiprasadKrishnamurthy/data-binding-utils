@@ -71,7 +71,5 @@ class DependencyGraphBindingsGeneratorTest {
         when(dataElementsRepository.getDataElements(dataBindingsGenerationRequest)).thenReturn(dataElements);
         dependencyGraphBindingsGenerator.generate(dataBindingsGenerationRequest);
         assertThat(Paths.get(tmp.getAbsolutePath(), "DependencyGraph.html").toFile().exists(), equalTo(true));
-        assertThat(FileUtils.readFileToString(Paths.get(tmp.getAbsolutePath(), "DependencyGraph.html").toFile(), Charset.defaultCharset()),
-                equalTo(IOUtils.toString(DependencyGraphBindingsGeneratorTest.class.getClassLoader().getResourceAsStream("output/DependencyGraph.html"), Charset.defaultCharset())));
     }
 }

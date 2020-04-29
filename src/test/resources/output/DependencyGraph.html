@@ -23,21 +23,82 @@
   color: white;
   font-size: 15px;
 }
-</style>
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 5px;
+  background-color: #499ff5;
+  color: white;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 5px;
+  background-color: #499ff5;
+  color: white;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+    </style>
 </head>
 <body>
 <div class="header">
     <h2>Schema Dependencies</h2>
 </div>
 <div id="mynetwork">Schema Dependencies</div>
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2 id="fileName"></h2>
+        </div>
+        <div class="modal-body">
+            <pre id="content"></pre>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
   // create an array with nodes
   var nodes = new vis.DataSet([
-          {id: 1, label: 'com.foo.data.EngineerType', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}},
-       {id: 2, label: 'com.foo.data.Person', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}},
-       {id: 3, label: 'com.foo.data.AddressInfo', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}},
-       {id: 4, label: 'com.foo.data.Employee', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}},
-       {id: 7, label: 'com.foo.data.Engineer', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}}  ]);
+          {id: 1, label: 'com.foo.data.EngineerType', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}, contents: {"qualifiedName":"com.foo.data.EngineerType","version":"1","type":"enumeration","baseType":null,"author":"unascribed","documentation":"A Engineer Type","fields":[],"tags":["engineerType"],"enumeratedValues":["BiographicSubmission","BiographicAndBiometricSubmission","BiometricLiveCapture"],"topLevelContainerType":false,"identifierFields":[],"fileName":"EngineerType","name":"EngineerType","identifiers":"","extends":false,"namespace":"com.foo.data"}},
+       {id: 2, label: 'com.foo.data.Person', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}, contents: {"qualifiedName":"com.foo.data.Person","version":"1","type":"object","baseType":null,"author":"unascribed","documentation":"A Person Type","fields":[{"name":"name","type":"string","documentation":"Name","required":true,"array":false,"javaType":"String","ajavaType":true},{"name":"addressInfo","type":"com.foo.data.AddressInfo","documentation":"Address Info","required":true,"array":false,"javaType":"com.foo.data.AddressInfo","ajavaType":false}],"tags":["person"],"enumeratedValues":[],"topLevelContainerType":false,"identifierFields":[],"fileName":"Person","name":"Person","identifiers":"","extends":false,"namespace":"com.foo.data"}},
+       {id: 3, label: 'com.foo.data.AddressInfo', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}, contents: {"qualifiedName":"com.foo.data.Person","version":"1","type":"object","baseType":null,"author":"unascribed","documentation":"A Person Type","fields":[{"name":"name","type":"string","documentation":"Name","required":true,"array":false,"javaType":"String","ajavaType":true},{"name":"addressInfo","type":"com.foo.data.AddressInfo","documentation":"Address Info","required":true,"array":false,"javaType":"com.foo.data.AddressInfo","ajavaType":false}],"tags":["person"],"enumeratedValues":[],"topLevelContainerType":false,"identifierFields":[],"fileName":"Person","name":"Person","identifiers":"","extends":false,"namespace":"com.foo.data"}},
+       {id: 4, label: 'com.foo.data.Employee', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}, contents: {"qualifiedName":"com.foo.data.Employee","version":"1","type":"object","baseType":"com.foo.data.Person","author":"unascribed","documentation":"A Employee Type","fields":[{"name":"employeeId","type":"string","documentation":"Employee ID","required":true,"array":false,"javaType":"String","ajavaType":true}],"tags":["employee"],"enumeratedValues":[],"topLevelContainerType":false,"identifierFields":[],"fileName":"Employee","name":"Employee","identifiers":"","extends":true,"namespace":"com.foo.data"}},
+       {id: 7, label: 'com.foo.data.Engineer', shape: 'icon', size: 20, font : {size : 10},  icon: {face: 'FontAwesome',code: '\uf15b',size: 50,color: '#57169a'}, contents: {"qualifiedName":"com.foo.data.Engineer","version":"1","type":"object","baseType":"com.foo.data.Employee","author":"unascribed","documentation":"A Engineer","fields":[{"name":"department","type":"string","documentation":"Department","required":true,"array":false,"javaType":"String","ajavaType":true},{"name":"type","type":"com.foo.data.EngineerType","documentation":"TODO","required":false,"array":false,"javaType":"com.foo.data.EngineerType","ajavaType":false},{"name":"phoneNumbers","type":"string","documentation":"TODO","required":false,"array":true,"javaType":"String","ajavaType":true}],"tags":["engineer"],"enumeratedValues":[],"topLevelContainerType":true,"identifierFields":["employeeId","type","department"],"fileName":"Engineer","name":"Engineer","identifiers":"of = {\"employeeId\", \"type\", \"department\"} ","extends":true,"namespace":"com.foo.data"}}  ]);
 
   // create an array with edges
   var edges = new vis.DataSet([
@@ -54,6 +115,28 @@
   };
   var options = {};
   var network = new vis.Network(container, data, options);
+
+    network.on( 'click', function(properties) {
+      var ids = properties.nodes;
+      var clickedNodes = nodes.get(ids);
+      var modal = document.getElementById("myModal");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+    modal.style.display = "block";
+   var contents = JSON.stringify(clickedNodes[0].contents, null, '\t');
+   document.getElementById("content").innerHTML = contents;
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }});
 
 </script>
 </body>

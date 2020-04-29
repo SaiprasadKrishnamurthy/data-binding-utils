@@ -22,12 +22,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class DefaultDataElementsRepository implements DataElementsRepository {
 
-    private final ConcurrentHashMap<String, DataElements> CACHE = new ConcurrentHashMap<>();
     private final ObjectMapper OBJECTMAPPER = new ObjectMapper();
 
     @Override
     public DataElements getDataElements(final DataBindingsGenerationRequest dataBindingsGenerationRequest) {
-        return CACHE.compute(dataBindingsGenerationRequest.getKey(), (key, value) -> (value == null) ? scanDataElements(dataBindingsGenerationRequest) : value);
+        return scanDataElements(dataBindingsGenerationRequest);
     }
 
     private DataElements scanDataElements(final DataBindingsGenerationRequest dataBindingsGenerationRequest) {

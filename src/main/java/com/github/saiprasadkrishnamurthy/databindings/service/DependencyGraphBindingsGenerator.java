@@ -1,5 +1,7 @@
 package com.github.saiprasadkrishnamurthy.databindings.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.saiprasadkrishnamurthy.databindings.model.*;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -12,6 +14,7 @@ import org.springframework.util.StopWatch;
 
 import java.io.File;
 import java.io.StringWriter;
+import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -23,7 +26,10 @@ import java.util.*;
 @Service
 public class DependencyGraphBindingsGenerator implements DataBindingsGenerator {
 
+    private final ObjectMapper OBJECTMAPPER = new ObjectMapper();
+
     private final DataElementsRepository dataElementsRepository;
+
 
     public DependencyGraphBindingsGenerator(final DataElementsRepository dataElementsRepository) {
         this.dataElementsRepository = dataElementsRepository;
@@ -40,12 +46,12 @@ public class DependencyGraphBindingsGenerator implements DataBindingsGenerator {
             List<Edge> edges = new ArrayList<>();
             MutableInt index = new MutableInt();
             dataElements.forEach((key, value) -> {
-                Node node = new Node(index.incrementAndGet(), key);
+                Node node = new Node(index.incrementAndGet(), key, getContents(value));
                 if (!nodes.contains(node)) {
                     nodes.add(node);
                 }
                 if (org.apache.commons.lang3.StringUtils.isNotBlank(value.getBaseType())) {
-                    Node parent = new Node(index.incrementAndGet(), value.getBaseType());
+                    Node parent = new Node(index.incrementAndGet(), value.getBaseType(), getContents(dataElements.get(value.getBaseType()).orElse(value)));
                     if (!nodes.contains(parent)) {
                         nodes.add(parent);
                     }
@@ -57,7 +63,7 @@ public class DependencyGraphBindingsGenerator implements DataBindingsGenerator {
                 value.getFields().stream()
                         .filter(f -> !f.isAJavaType())
                         .forEach(field -> {
-                            Node ref = new Node(index.incrementAndGet(), field.getType());
+                            Node ref = new Node(index.incrementAndGet(), field.getType(), getContents(value));
                             if (!nodes.contains(ref)) {
                                 nodes.add(ref);
                             }
@@ -90,5 +96,13 @@ public class DependencyGraphBindingsGenerator implements DataBindingsGenerator {
             response.setTotalTimeTakenInSeconds(stopWatch.getTotalTimeSeconds());
         }
         return response;
+    }
+
+    private String getContents(final DataElement value) {
+        try {
+            return OBJECTMAPPER.writeValueAsString(value);
+        } catch (JsonProcessingException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 }
