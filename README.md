@@ -10,7 +10,7 @@ are automatically generated.
 
 The agnostic JSON acts as the schemata for generating all the binding artifacts.
 
-![Image description](diagram.png)
+![Conceptual](diagram.png | width=100)
 
 ## How does a JSON data definition look like?
 
@@ -175,6 +175,10 @@ Equals and Hashcode are generated in POJOs based on what is defined in the `iden
 ## Are the AVRO schemas 'inlined'?
 Yes - if a JSON definition has `"topLevelContainerType": true`, then the generated AVRO schemas for these definitions
 will be a single file with all the dependencies inlined.
+
+## How does the generated dependency tree HTML look like?
+![Generated Tree](tree.png)
+
 
 ## Usage
 ```
